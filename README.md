@@ -1,4 +1,4 @@
-# auth-casper-vue
+# front.artcion.media
 
 ## Project setup
 ```
