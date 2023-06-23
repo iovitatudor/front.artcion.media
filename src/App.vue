@@ -1,8 +1,6 @@
 <template>
   <div id="main-section">
-    <br> <br>
     <LoginComponent v-if="!publicKey"/>
-    <br> <br>
     <WalletTabs v-if="publicKey"/>
   </div>
 </template>
