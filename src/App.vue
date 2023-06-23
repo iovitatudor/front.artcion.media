@@ -1,26 +1,36 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="main-section">
+    <br> <br>
+    <LoginComponent v-if="!publicKey"/>
+    <br> <br>
+    <WalletTabs v-if="publicKey"/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import {mapGetters} from "vuex";
+import LoginComponent from "./components/LoginComponent.vue";
+import WalletTabs from "./components/WalletTabsComponent.vue";
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  components: {LoginComponent, WalletTabs},
+  data: () => {
+    return {
+      isLogged: false,
+    }
+  },
+  computed: {
+    ...mapGetters({
+      publicKey: 'getPublicKey',
+    })
+  },
+  mounted() {},
+  methods: {}
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+#main-section {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
