@@ -1,6 +1,6 @@
 <template>
   <div id="main-section">
-    <div>
+    <div class="main-section-inside">
       {{ publicKey }}
       <v-btn type="button" @click="logIn" v-if="!isLogged">
         Login with Casper
@@ -16,7 +16,6 @@
           https://chrome.google.com/webstore/detail/casper-wallet/abkahkcbhngaebpcgfmhkoioedceoigp
         </a>
       </div>
-
     </div>
   </div>
 </template>
@@ -78,5 +77,12 @@ export default {
 <style>
 #main-section {
   text-align: center;
+
+}
+.main-section-inside{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
 }
 </style>
