@@ -24,7 +24,7 @@
     <div class="wallet-buttons">
       <v-row>
         <v-col cols="12">
-          <v-btn block :disabled="!amount || !publicKey" @click="transfer" color="indigo-darken-3">Continue</v-btn>
+          <v-btn block :disabled="!amount || !publicKey" @click="transfer" color="#DD1A33" class="text-white">Continue</v-btn>
         </v-col>
         <v-col cols="12">
           <v-btn block :disabled="!amount || !publicKey" @click="cancelTransfer">Cancel</v-btn>
@@ -37,7 +37,7 @@
       <p>HASH - <small>{{ hash }}</small></p>
       <template v-slot:actions>
         <v-btn
-            color="indigo"
+            color="#DD1A33" class="text-white"
             variant="text"
             @click="snackbar = false"
         >

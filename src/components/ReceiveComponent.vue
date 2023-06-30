@@ -6,7 +6,7 @@
           <small> Public Key</small>
           <small class="copy-btn">
             <v-icon
-                color="blue-darken-2"
+                color="#DD1A33"
                 icon="mdi-content-copy"
                 @click="copy"
             ></v-icon>

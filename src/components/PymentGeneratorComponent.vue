@@ -10,7 +10,7 @@
   <div class="wallet-buttons">
     <v-row>
       <v-col cols="12">
-        <v-btn block color="indigo-darken-3" @click="generateLink">Generate</v-btn>
+        <v-btn block color="#DD1A33" class="text-white" @click="generateLink">Generate</v-btn>
       </v-col>
     </v-row>
   </div>
@@ -20,7 +20,7 @@
         <small> Link</small>
         <small class="copy-btn">
           <v-icon
-              color="blue-darken-2"
+              color="#DD1A33"
               icon="mdi-content-copy"
               @click="copy"
           ></v-icon>

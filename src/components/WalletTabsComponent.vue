@@ -2,7 +2,7 @@
   <v-card class="wallet-area">
     <v-tabs
         v-model="tab"
-        color="deep-purple-accent-4"
+        color="#DD1A33"
         align-tabs="center"
     >
       <v-tab value="send" block>Send</v-tab>
@@ -18,6 +18,7 @@
           </v-row>
         </v-container>
       </v-window-item>
+
       <v-window-item value="receive">
         <v-container>
           <v-row>
@@ -88,13 +89,16 @@ export default {
 
 .generate-payment-link {
   cursor: pointer;
-  color: #3b50d2;
+  color: #DD1A33;
   font-size: 14px;
   text-transform: uppercase;
   margin-bottom: 30px;
 }
 
 .generate-payment-link:hover {
-  color: #6777da;
+  color: #DD1A33;
+}
+.v-card--variant-elevated {
+  box-shadow: none;
 }
 </style>

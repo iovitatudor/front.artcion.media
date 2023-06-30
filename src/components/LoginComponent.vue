@@ -2,7 +2,7 @@
   <div id="main-section">
     <div class="main-section-inside">
       {{ publicKey }}
-      <v-btn type="button" @click="logIn" v-if="!isLogged">
+      <v-btn type="button" @click="logIn" v-if="!isLogged" color="#DD1A33" class="text-white">
         Login with Casper
       </v-btn>
       <div v-else>
@@ -77,12 +77,11 @@ export default {
 <style>
 #main-section {
   text-align: center;
-
 }
 .main-section-inside{
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 400px;
+  height: 100vh;
 }
 </style>
