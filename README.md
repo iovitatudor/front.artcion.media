@@ -32,7 +32,7 @@ npm run test:unit
 
 ### Set .env
 ```
-VUE_APP_BACKEND_URL=http://localhost:3000
+VUE_APP_BACKEND_URL=https://back.artcoin.media
 VUE_APP_FRONTEND_URL=http://localhost:8080
 ```
 
