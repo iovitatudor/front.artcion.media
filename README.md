@@ -20,11 +20,6 @@ npm run build
 npm run lint
 ```
 
-### Tests E2E
-```
-npm run test:e2e
-```
-
 ### Tests Unit
 ```
 npm run test:unit

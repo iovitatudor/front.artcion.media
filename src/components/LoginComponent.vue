@@ -1,14 +1,9 @@
 <template>
   <div id="main-section">
     <div class="main-section-inside">
-      {{ publicKey }}
       <v-btn type="button" @click="logIn" v-if="!isLogged" color="#DD1A33" class="text-white">
         Login with Casper
       </v-btn>
-      <div v-else>
-        Public Key - {{ setPublicKey }}
-      </div>
-
       <div v-if="messages.installChrome">
         Please install casper wallet in your browser:
         <a href="https://chrome.google.com/webstore/detail/casper-wallet/abkahkcbhngaebpcgfmhkoioedceoigp"
@@ -38,11 +33,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      publicKey: 'getPublicKey',
+      // publicKey: 'getPublicKey',
     })
-  },
-  mounted() {
-    console.log(window.CasperWalletProvider);
   },
   methods: {
     ...mapActions({
@@ -73,15 +65,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#main-section {
-  text-align: center;
-}
-.main-section-inside{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-</style>

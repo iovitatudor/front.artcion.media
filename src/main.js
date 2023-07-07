@@ -8,6 +8,7 @@ import { createStore } from 'vuex'
 
 import "@mdi/font/css/materialdesignicons.css";
 import "@fortawesome/fontawesome-free/css/all.css";
+import './assets/styles.css';
 
 const store = createStore({
   state () {
