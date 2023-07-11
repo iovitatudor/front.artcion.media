@@ -58,7 +58,6 @@ export default {
       snackbar: false,
       total: '',
       link: null,
-      dynamicPublicKey: null,
     }
   },
   computed: {
@@ -69,12 +68,9 @@ export default {
   mounted() {
     const params = new URLSearchParams(window.location.search)
 
-    if (params.has('receive_total') && params.has('receive_publicKey')) {
+    if (params.has('receive_total')) {
       this.total = params.get('receive_total');
-      this.dynamicPublicKey = params.get('receive_publicKey');
       this.generateLink();
-    } else {
-      this.dynamicPublicKey = this.publicKey;
     }
   },
   methods: {
@@ -84,7 +80,7 @@ export default {
       this.snackbar = true;
     },
     generateLink() {
-      this.link = `${process.env.VUE_APP_FRONTEND_URL}/?publicKey=${this.dynamicPublicKey}&total=${this.total}`
+      this.link = `${process.env.VUE_APP_FRONTEND_URL}/?publicKey=${this.publicKey}&total=${this.total}`
     }
   }
 }

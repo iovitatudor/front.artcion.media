@@ -62,7 +62,7 @@ export default {
   mounted() {
     this.getBalance();
     const params = new URLSearchParams(window.location.search)
-    if (params.has('receive_total') && params.has('receive_publicKey')) {
+    if (params.has('receive_total')) {
       this.tab = 'receive';
       this.paymentGenerator = true;
     }
