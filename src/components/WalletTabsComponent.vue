@@ -8,7 +8,9 @@
       <v-tab value="send" block>Send</v-tab>
       <v-tab value="receive" block>Receive</v-tab>
     </v-tabs>
+
     <v-window v-model="tab">
+
       <v-window-item value="send">
         <v-container>
           <v-row>
@@ -59,6 +61,11 @@ export default {
   }),
   mounted() {
     this.getBalance();
+    const params = new URLSearchParams(window.location.search)
+    if (params.has('receive_total') && params.has('receive_publicKey')) {
+      this.tab = 'receive';
+      this.paymentGenerator = true;
+    }
   },
   computed: {
     ...mapGetters({
@@ -98,6 +105,7 @@ export default {
 .generate-payment-link:hover {
   color: #DD1A33;
 }
+
 .v-card--variant-elevated {
   box-shadow: none;
 }
