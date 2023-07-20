@@ -104,24 +104,17 @@ export default {
             await this.storeBalance((this.balance - this.amount) * 1000000000);
           }
           this.cancelTransfer();
-          setTimeout(() => {
-            this.hash = null
-          }, 10000);
+          setTimeout(() => { this.hash = null }, 10000);
         } catch (e) {
-          this.error = e;
+          this.error = e.response.data;
           this.snackbar = true;
-          setTimeout(() => {
-            this.error = null
-          }, 10000);
+          setTimeout(() => { this.error = null }, 10000);
         }
       } else {
         this.error = "You don't have enough funds!";
         this.snackbar = true;
-        setTimeout(() => {
-          this.error = null
-        }, 10000);
+        setTimeout(() => { this.error = null}, 10000);
       }
-
     }
   }
 }
