@@ -8,7 +8,7 @@
              autocomplete="off"
              @keyup="validateAmount"
       >
-      <label for="amount">- AC</label>
+      <label for="amount">AC</label>
     </div>
     <div class="wallet-labels">
       <v-row>
@@ -24,7 +24,8 @@
     <div class="wallet-buttons">
       <v-row>
         <v-col cols="12">
-          <v-btn block :disabled="!amount || !publicKey" @click="transfer" color="#DD1A33" class="text-white">Continue</v-btn>
+          <v-btn block :disabled="!amount || !publicKey" @click="transfer" color="#DD1A33" class="text-white">Continue
+          </v-btn>
         </v-col>
         <v-col cols="12">
           <v-btn block :disabled="!amount || !publicKey" @click="cancelTransfer">Cancel</v-btn>
@@ -33,8 +34,9 @@
     </div>
 
     <v-snackbar v-model="snackbar">
-      <div class="text-subtitle-1 pb-2">Transfer Completed Successfully!</div>
-      <p>HASH - <small>{{ hash }}</small></p>
+      <div v-if="hash" class="text-subtitle-1 pb-2">Transfer Completed Successfully!</div>
+      <p v-if="hash">HASH - <small>{{ hash }}</small></p>
+      <p v-if="error"><small>{{ error }}</small></p>
       <template v-slot:actions>
         <v-btn
             color="#DD1A33" class="text-white"
@@ -60,6 +62,7 @@ export default {
       publicKey: null,
       snackbar: false,
       hash: null,
+      error: null,
     }
   },
   computed: {
@@ -92,14 +95,33 @@ export default {
       this.publicKey = null;
     },
     async transfer() {
-      const response = await axios.get(`${process.env.VUE_APP_BACKEND_URL}/transfer?to=${this.publicKey}&from=${this.myPublicKey}&amount=${this.amount}`);
-      this.hash = response.data;
-      this.snackbar = true;
-      if (this.hash) {
-        await this.storeBalance((this.balance - this.amount) * 1000000000);
+      if (this.balance > 0) {
+        try {
+          const response = await axios.get(`${process.env.VUE_APP_BACKEND_URL}/transfer?to=${this.publicKey}&from=${this.myPublicKey}&amount=${this.amount}`);
+          this.hash = response.data;
+          this.snackbar = true;
+          if (this.hash) {
+            await this.storeBalance((this.balance - this.amount) * 1000000000);
+          }
+          this.cancelTransfer();
+          setTimeout(() => {
+            this.hash = null
+          }, 10000);
+        } catch (e) {
+          this.error = e;
+          this.snackbar = true;
+          setTimeout(() => {
+            this.error = null
+          }, 10000);
+        }
+      } else {
+        this.error = "You don't have enough funds!";
+        this.snackbar = true;
+        setTimeout(() => {
+          this.error = null
+        }, 10000);
       }
-      this.cancelTransfer();
-      setTimeout(() => {this.hash = null}, 10000);
+
     }
   }
 }
