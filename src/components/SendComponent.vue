@@ -53,6 +53,8 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import axios from "axios";
+import AES from 'crypto-js/aes';
+import Utf8 from 'crypto-js/enc-utf8';
 
 export default {
   name: "SendComponent",
@@ -96,26 +98,39 @@ export default {
     },
     async transfer() {
       if (this.balance > 0) {
+        const data = JSON.stringify({to: this.publicKey, from: this.myPublicKey, amount: this.amount});
+        const encryptData = this.encryptWithAES(data);
+
         try {
-          const response = await axios.get(`${process.env.VUE_APP_BACKEND_URL}/transfer?to=${this.publicKey}&from=${this.myPublicKey}&amount=${this.amount}`);
+          const response = await axios.get(`${process.env.VUE_APP_BACKEND_URL}/transfer?data=${encryptData}`);
           this.hash = response.data;
           this.snackbar = true;
           if (this.hash) {
             await this.storeBalance((this.balance - this.amount) * 1000000000);
           }
           this.cancelTransfer();
-          setTimeout(() => { this.hash = null }, 10000);
+          setTimeout(() => {
+            this.hash = null
+          }, 10000);
         } catch (e) {
           this.error = e.response.data;
           this.snackbar = true;
-          setTimeout(() => { this.error = null }, 10000);
+          setTimeout(() => {
+            this.error = null
+          }, 10000);
         }
       } else {
         this.error = "You don't have enough funds!";
         this.snackbar = true;
-        setTimeout(() => { this.error = null}, 10000);
+        setTimeout(() => {
+          this.error = null
+        }, 10000);
       }
-    }
+    },
+    encryptWithAES(data) {
+      const passphrase = process.env.VUE_APP_PASSPHRASE;
+      return AES.encrypt(data, passphrase).toString();
+    },
   }
 }
 </script>
