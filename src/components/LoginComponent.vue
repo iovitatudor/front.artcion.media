@@ -4,6 +4,7 @@
       <v-btn type="button" @click="logIn" v-if="!isLogged" color="#DD1A33" class="text-white">
         Login with Casper
       </v-btn>
+
       <div v-if="messages.installChrome">
         Please install casper wallet in your browser:
         <a href="https://chrome.google.com/webstore/detail/casper-wallet/abkahkcbhngaebpcgfmhkoioedceoigp"

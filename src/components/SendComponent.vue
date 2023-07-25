@@ -34,27 +34,18 @@
     </div>
 
     <v-snackbar v-model="snackbar">
-      <div v-if="hash" class="text-subtitle-1 pb-2">Transfer Completed Successfully!</div>
-      <p v-if="hash">HASH - <small>{{ hash }}</small></p>
-      <p v-if="error"><small>{{ error }}</small></p>
-      <template v-slot:actions>
-        <v-btn
-            color="#DD1A33" class="text-white"
-            variant="text"
-            @click="snackbar = false"
-        >
-          Close
-        </v-btn>
-      </template>
+      <div class="text-center">
+        <div v-if="hash" class="text-subtitle-1 pb-2">Transfer Completed Successfully!</div>
+        <p v-if="hash">HASH: <br><br> <small>{{ hash }}</small></p>
+        <p v-if="error"><small>{{ error }}</small></p>
+      </div>
     </v-snackbar>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import axios from "axios";
-import AES from 'crypto-js/aes';
-import Utf8 from 'crypto-js/enc-utf8';
+import {transfer} from "@/modules/casper";
 
 export default {
   name: "SendComponent",
@@ -98,12 +89,9 @@ export default {
     },
     async transfer() {
       if (this.balance > 0) {
-        const data = JSON.stringify({to: this.publicKey, from: this.myPublicKey, amount: this.amount});
-        const encryptData = this.encryptWithAES(data);
-
         try {
-          const response = await axios.get(`${process.env.VUE_APP_BACKEND_URL}/transfer?data=${encryptData}`);
-          this.hash = response.data;
+          const transferStatus = await transfer({publicKey: this.myPublicKey}, {publicKey: this.publicKey}, this.amount);
+          this.hash = transferStatus.deployHash;
           this.snackbar = true;
           if (this.hash) {
             await this.storeBalance((this.balance - this.amount) * 1000000000);
@@ -111,25 +99,21 @@ export default {
           this.cancelTransfer();
           setTimeout(() => {
             this.hash = null
-          }, 10000);
+          }, 15000);
         } catch (e) {
-          this.error = e.response.data;
+          this.error = e.message;
           this.snackbar = true;
           setTimeout(() => {
             this.error = null
-          }, 10000);
+          }, 12000);
         }
       } else {
         this.error = "You don't have enough funds!";
         this.snackbar = true;
         setTimeout(() => {
           this.error = null
-        }, 10000);
+        }, 12000);
       }
-    },
-    encryptWithAES(data) {
-      const passphrase = process.env.VUE_APP_PASSPHRASE;
-      return AES.encrypt(data, passphrase).toString();
     },
   }
 }

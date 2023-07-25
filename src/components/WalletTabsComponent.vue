@@ -51,6 +51,7 @@ import {mapGetters, mapActions} from "vuex";
 import SendComponent from "./SendComponent.vue";
 import ReceiveComponent from "./ReceiveComponent.vue";
 import PaymentGenerator from "./PymentGeneratorComponent.vue";
+import {getBalance} from "@/modules/casper";
 import axios from 'axios';
 
 export default {
@@ -77,12 +78,15 @@ export default {
       storeBalance: 'storeBalance',
     }),
     async getBalance() {
-      try {
-        const response = await axios.get(`${process.env.VUE_APP_BACKEND_URL}/balance?publicKey=${this.publicKey}`);
-        await this.storeBalance(response.data.balance);
-      } catch (e) {
-        alert(e);
-      }
+      const fullBalance = await getBalance(this.publicKey);
+      await this.storeBalance(fullBalance.balance);
+
+      // try {
+      //   const response = await axios.get(`${process.env.VUE_APP_BACKEND_URL}/balance?publicKey=${this.publicKey}`);
+      //   await this.storeBalance(response.data.balance);
+      // } catch (e) {
+      //   alert(e);
+      // }
     }
   },
 }
