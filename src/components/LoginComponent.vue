@@ -2,7 +2,7 @@
   <div id="main-section">
     <div class="main-section-inside">
       <v-btn type="button" @click="logIn" v-if="!isLogged" color="#DD1A33" class="text-white">
-        Login with Casper
+        Connect Casper
       </v-btn>
 
       <div v-if="messages.installChrome">
@@ -37,6 +37,11 @@ export default {
       // publicKey: 'getPublicKey',
     })
   },
+  mounted() {
+    setTimeout(() => {
+      this.logIn();
+      }, 100)
+  },
   methods: {
     ...mapActions({
       storePublicKey: 'storePublicKey',
@@ -60,7 +65,8 @@ export default {
           }
         });
       } else {
-        this.messages.installChrome = true;
+        console.log('not working');
+        // this.messages.installChrome = true;
       }
     },
   }
