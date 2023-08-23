@@ -2,7 +2,7 @@
   <div class="wallet-recipient">
     <label for="recipient">
       <div class="recipient-labels">
-        <small>Total (AC)</small>
+        <small>Total (ARTC)</small>
       </div>
       <input type="number" v-model="total">
     </label>

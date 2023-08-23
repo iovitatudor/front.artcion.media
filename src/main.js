@@ -19,7 +19,7 @@ const store = createStore({
   },
   getters: {
     getPublicKey: (state) => state.publicKey,
-    getBalance: (state) => state.balance ? state.balance / 1000000000 : 0,
+    getBalance: (state) => state.balance ? state.balance / 10000 : 0,
     // getBalance: (state) => state.balance ? parseFloat((state.balance).toFixed(3)) : 0,
   },
   mutations: {

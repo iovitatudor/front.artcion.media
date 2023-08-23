@@ -13,7 +13,7 @@
     <div class="wallet-labels">
       <v-row>
         <v-col cols="6" class="text-left"><small>Available to send</small></v-col>
-        <v-col cols="6" class="text-right"><b>{{ balance }} AC</b></v-col>
+        <v-col cols="6" class="text-right"><b>{{ balance }} ARTC</b></v-col>
       </v-row>
     </div>
     <div class="wallet-recipient">
@@ -94,7 +94,7 @@ export default {
           this.hash = transferStatus.deployHash;
           this.snackbar = true;
           if (this.hash) {
-            await this.storeBalance((this.balance - this.amount) * 1000000000);
+            await this.storeBalance((this.balance - this.amount) * 10000);
           }
           this.cancelTransfer();
           setTimeout(() => {

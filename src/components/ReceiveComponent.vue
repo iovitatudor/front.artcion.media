@@ -23,7 +23,7 @@
     <div class="wallet-labels">
       <v-row>
         <v-col cols="6" class="text-left"><small>Available balance</small></v-col>
-        <v-col cols="6" class="text-right"><b>{{ balance }} AC</b></v-col>
+        <v-col cols="6" class="text-right"><b>{{ balance }} ARTC</b></v-col>
       </v-row>
     </div>
 
