@@ -2,7 +2,7 @@ import {CEP18Client} from 'casper-cep18-js-client';
 import {CLPublicKey, DeployUtil, CasperClient} from "casper-js-sdk";
 
 // const NODE_URL = 'https://casper-node.xyz:7777/rpc';
-const NODE_URL = 'http://161.97.166.230:7777/rpc';
+const NODE_URL = 'https://node.artcoin.media/rpc';
 const NETWORK_NAME = 'casper';
 // const contractHash = 'hash-366519ebaf58c936bc1d6de938c3dc43f0220b327dcf8a69f43bc1703109ce53';
 const contractHash = 'hash-1e8c31d7170ed4cf3ef9fb80f5e790bb36d3ed88e0025a7c69ed6613d40b059c';
